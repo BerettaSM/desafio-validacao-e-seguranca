@@ -14,6 +14,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.bds04.dto.EventDTO;
 import com.devsuperior.bds04.security.annotations.Authenticated;
 import com.devsuperior.bds04.services.EventService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +38,7 @@ public class EventController {
 
     @Authenticated
     @PostMapping
-    public ResponseEntity<EventDTO> postMethodName(@RequestBody EventDTO dto) {
+    public ResponseEntity<EventDTO> postMethodName(@RequestBody @Valid EventDTO dto) {
         EventDTO saved = eventService.save(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
