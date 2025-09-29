@@ -13,6 +13,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devsuperior.bds04.dto.CityDTO;
 import com.devsuperior.bds04.security.annotations.AdminOnly;
 import com.devsuperior.bds04.services.CityService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +36,7 @@ public class CityController {
 
     @AdminOnly
     @PostMapping
-    public ResponseEntity<CityDTO> save(@RequestBody CityDTO dto) {
+    public ResponseEntity<CityDTO> save(@RequestBody @Valid CityDTO dto) {
         CityDTO saved = cityService.save(dto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/{id}")
